@@ -1,6 +1,7 @@
 'use strict';
 
-var IDEAL_API = 'https://metrics.privacybydesign.foundation/ideal/irma_ideal_server/api/v1/ideal/';
+//var IDEAL_API = 'https://metrics.privacybydesign.foundation/ideal/irma_ideal_server/api/v1/ideal/';
+var IDEAL_API = 'http://localhost:4242/irma_ideal_server/api/v1/ideal/';
 var IDIN_API = 'https://privacybydesign.foundation/tomcat/irma_ideal_server/api/v1/idin/';
 
 var iDealBanksLoaded = false;
@@ -110,6 +111,7 @@ function loadIDealBanks() {
 }
 
 function loadIDINBanks() {
+    return;
     if (iDINBanksLoaded) {
         return;
     }
@@ -232,21 +234,23 @@ function finishIDealTransaction() {
     }).done(function(response) {
         $('#pane-ideal-result-ok').removeClass('hidden');
         setStatus('info', MESSAGES['issuing-ideal-credential']);
-        console.log('issuing JWT:', response.jwt);
-        localStorage.idx_token = response.token;
-        IRMA.issue(response.jwt, function(e) {
-            delete localStorage.idx_ideal_trxid; // no longer needed
-            console.log('iDeal credential issued:', e);
-            setStatus('success', MESSAGES['issue-success']);
-            history.pushState(null, '', '?ec=ideal-phase3')
-            setPhase(3);
-        }, function(e) {
-            console.warn('cancelled:', e);
-            setStatus('cancel');
-        }, function(e) {
-            console.error('issue failed:', e);
-            setStatus('danger', MESSAGES['failed-to-issue-ideal'], e);
-        });
+        console.log('issuing session pointer:', response.sessionPointer);
+        irma.handleSession(response.sessionPointer, {lang: 'nl',})
+            .then(function(e) {
+                delete localStorage.idx_ideal_trxid; // no longer needed
+                console.log('iDeal credential issued:', e);
+                setStatus('success', MESSAGES['issue-success']);
+                history.pushState(null, '', '?ec=ideal-phase3')
+                setPhase(3);
+            }, function(e) {
+                if(e === 'CANCELLED') {
+                    console.warn('cancelled:', e);
+                    setStatus('cancel');
+                } else {
+                    console.error('issue failed:', e);
+                    setStatus('danger', MESSAGES['failed-to-issue-ideal'], e);
+                }
+            });
     }).fail(function(xhr) {
         $('#pane-ideal-result-fail').removeClass('hidden');
         delete localStorage.idx_ideal_trxid; // not valid anymore
