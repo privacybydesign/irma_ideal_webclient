@@ -1,0 +1,16 @@
+var MESSAGES = {
+    'lang': 'nl',
+    'api-fail': 'Kan geen verbinding maken met de backend server',
+    'unknown-error': 'Onbekende fout',
+    'start-ideal-transaction': 'iDeal-transaction aan het starten...',
+    'redirect-to-ideal-bank': 'U wordt doorgestuurd naar uw iDeal bank...',
+    'loading-return': 'Communiceren met de bank..',
+    'ideal-no-transaction': 'Geen iDeal-transactie meer actief.',
+    'issuing-ideal-credential': 'Uitgeven iDeal-attributen...',
+    'failed-to-verify-ideal': 'iDeal-transactie kon niet worden geverifieerd',
+    'failed-to-issue-ideal': 'iDeal-attributen konden niet worden uitgegeven.',
+    'issue-success': 'Uitgifte iDeal attributen succesvol!',
+    'ideal-status:Cancelled': 'Transactie geannuleerd.',
+    'ideal-status:other': 'Onbekende fout in de iDeal-transactie.',
+    'ideal-status:consumermsg': 'De volgende fout is opgetreden in de iDeal-transactie:',
+};

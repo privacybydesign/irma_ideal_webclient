@@ -1,0 +1,12 @@
+{
+  "name": "irma_ideal_server",
+  "version": "1.0.0",
+  "description": "IRMA ideal server webapp",
+  "author": "Privacy by Design Foundation",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "@privacybydesign/irmajs": "^0.1.5"
+  }
+}

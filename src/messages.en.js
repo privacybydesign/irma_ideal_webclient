@@ -1,0 +1,16 @@
+var MESSAGES = {
+    'lang': 'en',
+    'api-fail': 'Can\'t connect to the backend server',
+    'unknown-error': 'Unknown error',
+    'start-ideal-transaction': 'Starting iDeal transaction...',
+    'redirect-to-ideal-bank': 'Redirecting to iDeal bank...',
+    'loading-return': 'Communicating with the bank...',
+    'ideal-no-transaction': 'No transaction in progress anymore.',
+    'issuing-ideal-credential': 'Issuing iDeal attributes...',
+    'failed-to-verify-ideal': 'Failed to verify iDeal transaction.',
+    'failed-to-issue-ideal': 'Failed to issue iDeal credential.',
+    'issue-success': 'Successfully issued iDeal credential!',
+    'ideal-status:Cancelled': 'Transaction cancelled.',
+    'ideal-status:other': 'Unknown transaction error.',
+    'ideal-status:consumermsg': 'Transaction failed with a message:',
+};

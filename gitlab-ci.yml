@@ -1,0 +1,16 @@
+image: privacybydesign/node_yarn:latest
+
+stages:
+  - build
+
+before_script:
+  - set -euxo pipefail
+  - yarn install
+
+build:
+  stage: build
+  script:
+    - ./build.sh "nl"
+  artifacts:
+    paths:
+      - build/*
