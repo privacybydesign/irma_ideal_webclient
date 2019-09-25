@@ -16,7 +16,7 @@
     <body>
         <div class="container-fluid">
             <div style="display: flex;align-items: center;">
-                <h1 style="float: left">Bankattributen laden in uw IRMA app</h1>
+                <h1 style="float: left">Bankrekeningnummer laden in uw IRMA app</h1>
                 <img class='logo' src="images/iDEAL-klein.png"/>
             </div>
 
@@ -31,9 +31,9 @@
                 <p>
                     Op deze pagina kunt u de rekeningdetails van een van uw
                     bankrekeningen ophalen als attributen in de IRMA app op uw telefoon.
-                    Het gaat om het "IBAN" rekeningnummer (plus uw naam), via
-                    <a href="https://www.ideal.nl/">iDeal</a>. U kunt deze attributen gebruiken om aan te
-                    tonen dat u daadwerkelijk de rekeninghouder bent van een bepaalde bankrekening.
+                    Het gaat om het "IBAN" rekeningnummer (plus uw naam en de BIC van uw bank), via
+                    een kleine <a href="https://www.ideal.nl/">iDeal-betaling</a>. U kunt deze attributen daarna
+                    gebruiken om aan te tonen dat u daadwerkelijk de rekeninghouder bent van een bepaalde bankrekening.
                 </p>
                 <p>
                     <b>Let op!</b> Aan de uitgifte van deze attributen zijn &euro;0,50 aan kosten verbonden.
@@ -42,13 +42,13 @@
 
                 <form id="form-ideal-request" onsubmit="return false;">
                     <div class="form-group form-bank">
-                        <label for="input-ideal-bank">iDeal Bank</label>
+                        <label for="input-ideal-bank">Kies uw bank</label>
                         <select id="input-ideal-bank" class="form-control" required>
                             <option disabled value="">Loading...</option>
                         </select>
                     </div>
                     <div class="form-group form-submit text-right">
-                        <input type="submit" id="btn-ideal-request" class="btn btn-primary" value="Inloggen via uw bank"/>
+                        <input type="submit" id="btn-ideal-request" class="btn btn-primary" value="Start iDeal-betaling"/>
                     </div>
                 </form>
 
@@ -62,7 +62,7 @@
                       pagina direct de IBAN rekeninggegevens laden in
                       uw IRMA app; het gaat om de gegevens van de
                       rekening waar u deze &euro;0,50 euro mee betaalt. Als u
-                      meerdere rekeningen heeft kunt u zelf kiezen
+                      meerdere rekeningen heeft, kunt u zelf kiezen
                       welke u gebruikt voor de betaling, en dus ook,
                       van welke rekening u gegevens in uw IRMA app
                       wilt hebben. Als u van meerdere rekeningen de
@@ -92,11 +92,10 @@
                     ze terstond door de stichting uit de eigen
                     systemen verwijderd. Wel blijft er op de
                     bankrekening van de stichting een
-                    (onvermijdelijke) registratie staan van de iDeal
-                    betaling. Met het starten van het bovenstaande
-                    laadproces gaat u akkoord met de verwerking van uw
-                    persoonsgegevens door de stichting Privacy by
-                    Design. Uitgebreidere informatie is te vinden
+                    (onvermijdelijke) registratie staan van de iDeal-betaling.
+                    Met het starten van het bovenstaande laadproces gaat u
+                    akkoord met de verwerking van uw persoonsgegevens door de
+                    stichting Privacy by Design. Uitgebreidere informatie is te vinden
                     in <a href="https://privacybydesign.foundation/privacy-policy/">privacy
                     policy</a> van de stichting.
                   </p>
