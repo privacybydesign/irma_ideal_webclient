@@ -147,7 +147,7 @@ function finishIDealTransaction() {
         $('#pane-ideal-result-ok').removeClass('hidden');
         setStatus('info', MESSAGES['issuing-ideal-credential']);
         console.log('issuing session pointer:', response.sessionPointer);
-        irma.handleSession(response.sessionPointer, {lang: 'nl',})
+        irma.handleSession(response.sessionPointer, {language: 'nl'})
             .then(function(e) {
                 delete localStorage.idx_ideal_trxid; // no longer needed
                 console.log('iDeal credential issued:', e);
