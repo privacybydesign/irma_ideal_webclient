@@ -7,6 +7,6 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
-    "@privacybydesign/irmajs": "^0.1.5"
+    "@privacybydesign/irmajs": "^0.1.8"
   }
 }

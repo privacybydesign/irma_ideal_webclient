@@ -23,7 +23,7 @@ function init() {
 
 function updatePhase() {
     let params = parseURLParams();
-    if (params.ec === 'ideal') {
+    if (params.ec) {
         // phase 2: get the result and issue the iDeal credential
         setPhase(2);
     } else {
@@ -43,13 +43,14 @@ function setPhase(num) {
         if (localStorage.idx_ideal_trxid) {
             // A session is in progress, offer to issue.
             $('#transaction-alert').show();
-            $('#transaction-alert a').attr('href', '?trxid=' + localStorage.idx_ideal_trxid + '&ec=ideal');
+            $('#transaction-alert a').attr('href', '?trxid=' + localStorage.idx_ideal_trxid + '&ec=' + localStorage.idx_ideal_ec);
         }
     } else if (num === 2) {
         if (params.trxid) {
             localStorage.idx_ideal_trxid = params.trxid;
-            // trxid is now saved, drop it from the URL
-            history.replaceState(null, '', '?ec=ideal');
+            localStorage.idx_ideal_ec = params.ec;
+            // trxid and ec are now saved, drop it from the URL
+            history.replaceState(null, '', '?');
         }
         finishIDealTransaction();
     }
@@ -142,16 +143,19 @@ function finishIDealTransaction() {
         url: config.ideal_api_url + 'return',
         data: {
             trxid: localStorage.idx_ideal_trxid,
+            ec: localStorage.idx_ideal_ec,
         },
     }).done(function(response) {
         $('#pane-ideal-result-ok').removeClass('hidden');
         setStatus('info', MESSAGES['issuing-ideal-credential']);
         console.log('issuing session pointer:', response.sessionPointer);
-        irma.handleSession(response.sessionPointer, {language: 'nl'})
+        irma.handleSession(response.sessionPointer, {language: MESSAGES['lang']})
             .then(function(e) {
                 delete localStorage.idx_ideal_trxid; // no longer needed
+                delete localStorage.idx_ideal_ec;
                 console.log('iDeal credential issued:', e);
                 setStatus('success', MESSAGES['issue-success']);
+                $('#btn-ideal-issue').hide();
             }, function(e) {
                 if(e === 'CANCELLED') {
                     console.warn('cancelled:', e);
@@ -164,20 +168,13 @@ function finishIDealTransaction() {
     }).fail(function(xhr) {
         $('#pane-ideal-result-fail').removeClass('hidden');
         delete localStorage.idx_ideal_trxid; // not valid anymore
-        if (xhr.status === 502 && xhr.responseText.substr(0, 13) === 'ideal-status:') {
-            if (xhr.responseText in MESSAGES) {
-                if (xhr.responseText === 'ideal-status:Cancelled') {
-                    setStatus('warning', MESSAGES[xhr.responseText]);
-                } else {
-                    setStatus('danger', MESSAGES[xhr.responseText]);
-                }
-            } else {
-                setStatus('danger', MESSAGES['ideal-status:other'], xhr.responseText);
-            }
-        } else if (xhr.status === 502 && xhr.responseText.substr(0, 12) === 'consumermsg:') {
-            setStatus('danger', MESSAGES['ideal-status:consumermsg'], xhr.responseText.substr(12));
+        delete localStorage.idx_ideal_ec;
+        if (xhr.status === 500 && xhr.responseText in MESSAGES) {
+            setStatus('warning', MESSAGES[xhr.responseText]);
+        } else if (xhr.status === 404 && xhr.responseText.substr(0, 21) === 'error:trxid-not-found') {
+            setStatus('warning', MESSAGES['ideal-transaction-not-found']);
         } else {
-            setStatus('danger', MESSAGES['failed-to-verify'], xhr);
+            setStatus('danger', MESSAGES['ideal-status:other'], xhr);
             console.error('failed to finish iDeal transaction:', xhr.responseText);
         }
     });
@@ -187,7 +184,6 @@ function retryIDealTransaction() {
     loadIDealBanks();
     $('#result-alert').hide();
     setPhase(1);
-    delete localStorage.idx_ideal_trxid;
     history.pushState(null, '', '?');
 }
 
