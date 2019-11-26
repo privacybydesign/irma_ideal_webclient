@@ -1,7 +1,7 @@
 {
-  "name": "irma_ideal_server",
+  "name": "irma_ideal_webclient",
   "version": "1.0.0",
-  "description": "IRMA ideal server webapp",
+  "description": "IRMA ideal webclient",
   "author": "Privacy by Design Foundation",
   "license": "BSD-3-Clause",
   "dependencies": {
