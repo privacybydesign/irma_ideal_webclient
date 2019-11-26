@@ -1,4 +1,4 @@
-# IRMA IDeal server
+# IRMA IDeal webclient
 
 This is the webapp for the iDeal-only issuer. It can be used as a front-end for the 
 [go-ideal-server](https://github.com/privacybydesign/go-ideal-issuer).
