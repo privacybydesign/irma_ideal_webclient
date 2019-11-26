@@ -15,6 +15,7 @@ rm -rf build
 cp -r src build
 rm build/messages.*
 cp "src/messages.$LANG.js" "build/messages.$LANG.js"
+rm build/*.example.*
 
 mkdir build/assets
 cp node_modules/bootstrap/dist/css/bootstrap.min.css build/assets/bootstrap.min.css
