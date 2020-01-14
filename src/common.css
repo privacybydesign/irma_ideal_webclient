@@ -4,6 +4,17 @@ body {
     max-width: 800px;
 }
 
+.top {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 510px) {
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+}
+
 body:not(.phase1) #pane-ideal {
     display: none;
 }
@@ -16,6 +27,10 @@ body:not(.phase2) #pane-ideal-result-fail {
     display: none;
 }
 
+#pane-ideal-result-fail {
+    margin-top: 50px;
+}
+
 body:not(.phase3) #pane-idin {
     display: none;
 }
@@ -26,10 +41,7 @@ body:not(.phase4) #pane-idin-result {
 
 .logo {
     height: 50px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-right: 0px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .bottom {
