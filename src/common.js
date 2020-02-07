@@ -1,6 +1,6 @@
 'use strict';
 
-let iDealBanksLoaded = false;
+let iDealInfoLoaded = false;
 
 // Hack to get the clicked button, with browser-based form validation.
 // Apparently there is no way to get the clicked button that also works on OS X
@@ -38,7 +38,7 @@ function setPhase(num) {
     $(document.body).attr('class', 'phase' + num);
     const params = parseURLParams();
     if (num === 1) {
-        loadIDealBanks();
+        loadIDealInfo();
         $('#transaction-alert').hide(); // set default back
         if (localStorage.idx_ideal_trxid) {
             // A session is in progress, offer to issue.
@@ -56,21 +56,57 @@ function setPhase(num) {
     }
 }
 
-function loadIDealBanks() {
-    if (iDealBanksLoaded) {
+function loadIDealInfo() {
+    if (iDealInfoLoaded) {
         return;
     }
-    iDealBanksLoaded = true;
-    const select = $('#input-ideal-bank');
+    iDealInfoLoaded = true;
+    const selectBank = $('#input-ideal-bank');
     $.ajax({
         url: config.ideal_api_url + 'banks',
     }).done(function(data) {
-        insertBanksIntoForm(data, select);
+        insertBanksIntoForm(data, selectBank);
     }).fail(function() {
         // TODO: show error on top? i18n?
-        select.empty();
-        select.append($('<option selected disabled hidden>Failed to load bank list</option>'));
+        selectBank.empty();
+        selectBank.append($('<option selected disabled hidden>Failed to load bank list</option>'));
     });
+
+    const selectAmount = $('#input-amount');
+    $.ajax({
+        url: config.ideal_api_url + 'amounts',
+    }).done(function(data) {
+        insertAmountsIntoForm(data, selectAmount);
+    }).fail(function() {
+        // TODO: show error on top? i18n?
+        selectAmount.empty();
+        selectAmount.append($('<option selected disabled hidden>Failed to load amounts list</option>'));
+    });
+}
+
+function insertAmountsIntoForm(data, select) {
+    // clear existing data ('Loading...')
+    select.empty();
+
+    // Load all amounts and make sure they are sorted
+    const amounts = data.map(a => parseFloat(a).toFixed(2));
+    amounts.sort(function(a,b) { return a - b;});
+
+    // Add default amount
+    const defaultOption = $('<option selected>');
+    const minimumAmount = amounts[0];
+    defaultOption.text(MESSAGES['ideal-minimum-amount'](minimumAmount));
+    defaultOption.val(minimumAmount);
+    select.append(defaultOption);
+
+    // Insert other amounts (if present)
+    for (let i=1; i < amounts.length; i++) {
+        const option = $('<option>');
+        const donationAmount = amounts[i] - minimumAmount;
+        option.text(MESSAGES['ideal-donation-amount'](amounts[i], donationAmount.toFixed(2)));
+        option.val(amounts[i]);
+        select.append(option);
+    }
 }
 
 function insertBanksIntoForm(data, select) {
@@ -114,9 +150,11 @@ function startIDealTransaction(e) {
     $('#result-alert').hide();
 
     const selectedBank = $('#input-ideal-bank').val();
+    const selectedAmount = $('#input-amount').val();
     sessionStorage.idx_selectedBank = selectedBank;
     const data = {
         bank: selectedBank,
+        amount: selectedAmount,
     };
     $.ajax({
         method: 'POST',
@@ -181,7 +219,7 @@ function finishIDealTransaction() {
 }
 
 function retryIDealTransaction() {
-    loadIDealBanks();
+    loadIDealInfo();
     $('#result-alert').hide();
     setPhase(1);
     history.pushState(null, '', '?');
