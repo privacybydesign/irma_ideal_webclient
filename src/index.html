@@ -36,14 +36,21 @@
                     gebruiken om aan te tonen dat u daadwerkelijk de rekeninghouder bent van een bepaalde bankrekening.
                 </p>
                 <p>
-                    <b>Let op!</b> Aan de uitgifte van deze attributen zijn &euro;0,50 aan kosten verbonden.
-                    Onderaan deze pagina staat beschreven waarvoor deze kosten nodig zijn.
+                    <b>Let op!</b> Aan de uitgifte van deze attributen zijn &euro;0,50 aan minimale kosten verbonden.
+                    Onderaan deze pagina staat beschreven waarvoor deze kosten nodig zijn. Het staat u vrij
+                    meer te betalen dan het minimale bedrag. Het deel boven de &euro;0,50 betreft een donatie.
                 </p>
 
                 <form id="form-ideal-request" onsubmit="return false;">
                     <div class="form-group form-bank">
                         <label for="input-ideal-bank">Kies uw bank</label>
                         <select id="input-ideal-bank" class="form-control" required>
+                            <option disabled value="">Loading...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-amount">Gewenst bedrag</label>
+                        <select id="input-amount" class="form-control" required>
                             <option disabled value="">Loading...</option>
                         </select>
                     </div>
@@ -56,7 +63,7 @@
                   <p>
                     Het gehele laadproces werkt als volgt:
                     <ol>
-                      <li> U doet een online betaling van &euro;0,50, via
+                      <li> U doet een online betaling van minimaal &euro;0,50, via
                       iDEAL, met uw gebruikelijke bankmiddelen. </li>
                       <li> Nadat u een iDEAL-betaling volledig voltooid heeft, moet
                       u terugkeren naar de huidige pagina om de nieuwe
@@ -64,18 +71,18 @@
                       gaat die terugkeer automatisch, maar bij andere banken
                       moet u explicit op een "keer terug" knop drukken.
                       De attributen die u van ons ontvangt gaan over de gegevens
-                      van de rekening waar u de &euro;0,50 mee betaald heeft. Als u
+                      van de rekening waar u het bedrag mee betaald heeft. Als u
                       meerdere rekeningen heeft, kunt u zelf kiezen
                       welke u gebruikt voor de betaling, en dus ook,
                       van welke rekening u gegevens in uw IRMA app
                       wilt hebben. Als u van meerdere rekeningen de
                       gegevens wilt laden, dan dient u het laadproces
-                      meerdere keren te doorlopen; het bedrag van &euro;0,50
-                      moet dan meerdere keren betaald worden,
+                      meerdere keren te doorlopen; er moet dan ook
+                      meerdere keren betaald worden,
                       helaas. </li>
                     </ol>
 
-                    De betaling van &euro;0,50 wordt enerzijds gebruikt om
+                    De basisbedrag van &euro;0,50 wordt enerzijds gebruikt om
                     te controleren of u echt over de bankrekening
                     beschikt, en anderzijds om de (afgeronde) kosten
                     van de iDEAL-transacties te dekken. De

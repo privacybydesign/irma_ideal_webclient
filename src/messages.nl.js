@@ -16,4 +16,6 @@ var MESSAGES = {
     'error:transaction-expired': 'De sessie bij uw bank is verlopen. Helaas kunnen wij uw gegevens daardoor niet meer ophalen.',
     'ideal-status:other': 'Onbekende fout in de iDeal-transactie.',
     'ideal-status:consumermsg': 'De volgende fout is opgetreden in de iDeal-transactie:',
+    'ideal-minimum-amount': (amount) => '\u20ac ' + amount + ' (minimumbedrag)',
+    'ideal-donation-amount': (amount, donation) => '\u20ac ' + amount + ' (waarvan \u20ac ' + donation + ' donatie)',
 };

@@ -16,4 +16,6 @@ var MESSAGES = {
     'error:transaction-expired': 'The session has been expired at your bank. Unfortunately, we are not able to retrieve your personal data anymore.',
     'ideal-status:other': 'Unknown transaction error.',
     'ideal-status:consumermsg': 'Transaction failed with a message:',
+    'ideal-minimum-amount': (amount) => '\u20ac ' + amount + ' (minimum amount)',
+    'ideal-donation-amount': (amount, donation) => '\u20ac ' + amount + ' (including a donation of \u20ac ' + donation + ')',
 };
