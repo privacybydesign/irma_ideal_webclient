@@ -12,5 +12,7 @@ build:
   script:
     - ./build.sh "nl"
   artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 100 year
     paths:
       - build/*
