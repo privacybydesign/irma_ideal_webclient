@@ -48,3 +48,7 @@ body:not(.phase4) #pane-idin-result {
     margin-top: 3cm;
     margin-bottom: 1cm;
 }
+
+.hidden {
+    display: none;
+}

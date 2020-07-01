@@ -172,7 +172,6 @@ function startIDealTransaction(e) {
 function finishIDealTransaction() {
     if (!('idx_ideal_trxid' in localStorage)) {
         setStatus('warning', MESSAGES['ideal-no-transaction']);
-        $('#pane-ideal-result-fail').removeClass('hidden');
         return;
     }
     setStatus('info', MESSAGES['loading-return']);
@@ -184,7 +183,6 @@ function finishIDealTransaction() {
             ec: localStorage.idx_ideal_ec,
         },
     }).done(function(response) {
-        $('#pane-ideal-result-ok').removeClass('hidden');
         setStatus('info', MESSAGES['issuing-ideal-credential']);
         console.log('issuing session pointer:', response.sessionPointer);
         irma.handleSession(response.sessionPointer, {language: MESSAGES['lang']})
@@ -202,6 +200,10 @@ function finishIDealTransaction() {
                     console.error('issue failed:', e);
                     setStatus('danger', MESSAGES['failed-to-issue-ideal'], e);
                 }
+            })
+            .finally(function() {
+                $('#pane-ideal-result-ok').removeClass('hidden');
+                $('#pane-ideal-result-fail').removeClass('hidden');
             });
     }).fail(function(xhr) {
         $('#pane-ideal-result-fail').removeClass('hidden');
