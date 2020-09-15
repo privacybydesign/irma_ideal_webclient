@@ -14,19 +14,22 @@
         <script src="common.js" defer></script>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="top d-flex justify-content-between">
-                <h1>Bankrekeningnummer laden in uw IRMA app</h1>
-                <img class='align-self-center logo' src="images/iDEAL-klein.png"/>
+        <header>
+            <h1>Bankrekeningnummer laden in uw IRMA app</h1>
+            <img class='align-self-center logo' src="images/iDEAL-klein.png"/>
+        </header>
+        <div id="status-bar" class="status hidden" role="alert">
+            <div class="status-container">
+                <div id="status"></div>
             </div>
-
-            <div id="result-alert" class="alert alert-warning" style="display: none"></div>
-
-            <div id="transaction-alert" class="alert alert-warning" style="display: none">
+        </div>
+        <div id="transaction-alert" class="alert-info" style="display: none">
+            <div class="status-container">
                 <strong>Er is nog een lopende transactie actief.</strong>
-                Ga verder met de al lopende <a href="">transactie</a>.
+                Ga verder met de al lopende <a id="transaction-alert-link" href="">transactie</a>.
             </div>
-
+        </div>
+        <div class="container-fluid">
             <div id="pane-ideal">
                 <p>
                     Op deze pagina kunt u de rekeningdetails van uw

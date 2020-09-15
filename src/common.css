@@ -1,7 +1,61 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/subset-Montserrat-Regular.woff2') format('woff2'),
+    url('./fonts/subset-Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
-body {
-    margin: 0 auto;
-    max-width: 800px;
+@font-face {
+    font-family: 'Karla';
+    src: url('./fonts/subset-Karla-Bold.woff2') format('woff2'),
+    url('./fonts/subset-Karla-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/subset-Montserrat-SemiBold.woff2') format('woff2'),
+    url('./fonts/subset-Montserrat-SemiBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    background-color: #F2F5F8;
+    font-family: 'Montserrat', Verdana, Arial, sans-serif;
+}
+
+header {
+    background-color: #DFE6EE;
+    color: #3C4B5A;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h1 {
+    display: block;
+    margin: 0;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 16px 0;
+    font-weight: bold;
+    font-family: 'Karla', Verdana, Arial, sans-serif;
+}
+
+.container-fluid {
+    display: block;
+    padding: 16px;
+    color: #15222E;
+    max-width: 600px;
+    margin: auto;
 }
 
 .top {
@@ -51,4 +105,50 @@ body:not(.phase4) #pane-idin-result {
 
 .hidden {
     display: none;
+}
+
+.status-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 16px;
+    color: white;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert-info {
+    background-color: #004c92;
+    border-color: #004c92;
+}
+
+.btn-primary {
+    background-color: #004c92;
+    border-color: #004c92;
+}
+
+a {
+    color: #004c92;
+}
+
+.alert-danger {
+    background-color: #d44454;
+    border-color: #d44454;
+}
+
+.alert-warning {
+    background-color: #ffce23;
+    border-color: #ffce23;
+}
+
+.alert-success {
+    background-color: #079268;
+    border-color: #079268;
+}
+
+.status-container a {
+    color: white;
+    text-decoration: underline;
 }
