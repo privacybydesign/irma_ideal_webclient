@@ -43,7 +43,7 @@ function setPhase(num) {
         if (localStorage.idx_ideal_trxid) {
             // A session is in progress, offer to issue.
             $('#transaction-alert').show();
-            $('#transaction-alert a').attr('href', '?trxid=' + localStorage.idx_ideal_trxid + '&ec=' + localStorage.idx_ideal_ec);
+            $('#transaction-alert-link').attr('href', '?trxid=' + localStorage.idx_ideal_trxid + '&ec=' + localStorage.idx_ideal_ec);
         }
     } else if (num === 2) {
         if (params.trxid) {
@@ -147,7 +147,7 @@ function startIDealTransaction(e) {
     e.preventDefault();
     setStatus('info', MESSAGES['start-ideal-transaction']);
     $('#btn-ideal-request').prop('disabled', true);
-    $('#result-alert').hide();
+    setStatus('cancel');
 
     const selectedBank = $('#input-ideal-bank').val();
     const selectedAmount = $('#input-amount').val();
@@ -222,7 +222,7 @@ function finishIDealTransaction() {
 
 function retryIDealTransaction() {
     loadIDealInfo();
-    $('#result-alert').hide();
+    setStatus('cancel');
     setPhase(1);
     history.pushState(null, '', '?');
 }
@@ -235,18 +235,27 @@ function setStatus(alertType, message, errormsg) {
         errormsg = errormsg.status + ' ' + errormsg.statusText;
     }
 
-    const alert = $('#result-alert');
+    const alert = $('#status-bar');
     if (alertType === 'cancel') {
         alert.hide();
         return;
     }
-    alert.show();
-    alert.attr('class', 'alert alert-' + alertType);
-    alert.text(message);
+
+    const statusElement = $('#status');
+    statusElement.html(message);
     if (errormsg) {
-        alert.append('<br>');
-        alert.append($('<small></small>').text(errormsg));
+        statusElement.append('<br>');
+        statusElement.append($('<small></small>').text(errormsg));
     }
+
+    alert
+      .removeClass('alert-success')
+      .removeClass('alert-info')
+      .removeClass('alert-warning')
+      .removeClass('alert-danger')
+      .addClass('alert-'+alertType)
+      .removeClass('hidden');
+    window.scrollTo(0,0);
 }
 
 // https://stackoverflow.com/a/8486188/559350
