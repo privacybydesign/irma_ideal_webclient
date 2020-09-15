@@ -12,7 +12,7 @@ var MESSAGES = {
     'failed-to-issue-ideal': 'Failed to issue iDeal credential.',
     'issue-success': 'Successfully issued iDeal credential!',
     'error:transaction-cancelled': 'Transaction cancelled.',
-    'error:transaction-open': 'Your bank did not process the transaction yet. Please check this page again in 24 hours on the same device. As long as you don\'t start a new issuance session for iDeal attributes in IRMA, you can return to this transaction without having to pay again.',
+    'error:transaction-open': 'Your bank did not process the transaction yet. Please check this page again in 24 hours on the same device or save the link below. As long as you don\'t start a new issuance session for iDeal attributes in IRMA, you can return to this transaction without having to pay again.<br><br><a href="' + link + '">' + link + '</a>',
     'error:transaction-expired': 'The session has been expired at your bank. Unfortunately, we are not able to retrieve your personal data anymore.',
     'ideal-status:other': 'Unknown transaction error.',
     'ideal-status:consumermsg': 'Transaction failed with a message:',

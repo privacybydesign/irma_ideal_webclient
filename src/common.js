@@ -47,6 +47,7 @@ function setPhase(num) {
         }
     } else if (num === 2) {
         if (params.trxid) {
+            localStorage.idx_ideal_link = location.href;
             localStorage.idx_ideal_trxid = params.trxid;
             localStorage.idx_ideal_ec = params.ec;
             // trxid and ec are now saved, drop it from the URL
@@ -207,6 +208,12 @@ function finishIDealTransaction() {
             });
     }).fail(function(xhr) {
         $('#pane-ideal-result-fail').removeClass('hidden');
+
+        if (xhr.responseText === 'error:transaction-open') {
+            setStatus('warning', MESSAGES['error:transaction-open'](localStorage.idx_ideal_link));
+            return;
+        }
+
         delete localStorage.idx_ideal_trxid; // not valid anymore
         delete localStorage.idx_ideal_ec;
         if (xhr.status === 500 && xhr.responseText in MESSAGES) {
