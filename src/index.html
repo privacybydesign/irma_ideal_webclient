@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Uitgifte IRMA iDEAL-attributen</title>
+        <title>Uitgifte IRMA iDEAL-kaartje</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="assets/bootstrap.min.css"/>
         <link rel="stylesheet" href="common.css"/>
@@ -15,7 +15,7 @@
     </head>
     <body>
         <header>
-            <h1>Bankrekeningnummer laden in uw IRMA app</h1>
+            <h1>Bankrekeningnummer laden in je IRMA-app</h1>
             <img class='align-self-center logo' src="images/iDEAL-klein.png"/>
         </header>
         <div id="status-bar" class="status hidden" role="alert">
@@ -28,38 +28,38 @@
                 <strong>Er is nog een lopende transactie actief.</strong>
                 <a id="transaction-alert-link" href="">Ga verder met de al lopende transactie.</a>
                 Bij het starten van een nieuwe transactie wordt de lopende transactie overschreven.
-                U moet dan opnieuw betalen.
+                Je moet dan opnieuw betalen.
             </div>
         </div>
         <div class="container-fluid">
             <div id="pane-ideal">
                 <p>
-                    Op deze pagina kunt u de rekeningdetails van uw
-                    bankrekening(en) ophalen als attributen in de IRMA app op uw telefoon.
-                    Het gaat om het "IBAN" rekeningnummer (plus uw naam en de BIC van uw bank), via
-                    een kleine <a href="https://www.ideal.nl/">iDEAL-betaling</a>. U kunt deze attributen daarna
-                    gebruiken om aan te tonen dat u daadwerkelijk de rekeninghouder bent van een bepaalde bankrekening.
+                    Op deze pagina kun je de rekeningdetails van je
+                    bankrekening(en) ophalen als kaartje in de IRMA-app op je telefoon.
+                    Het gaat om het "IBAN" rekeningnummer (plus je naam en de BIC van je bank), via
+                    een kleine <a href="https://www.ideal.nl/">iDEAL-betaling</a>. Je kunt deze attributen daarna
+                    gebruiken om aan te tonen dat je daadwerkelijk de rekeninghouder bent van een bepaalde bankrekening.
                 </p>
                 <p>
-                    <b>Let op!</b> Voor de uitgifte van deze attributen betaalt u een
+                    <b>Let op!</b> Voor de uitgifte van deze attributen betaal je een
                     kostprijs van &euro;0,50 aan de stichting Privacy by Design. Onderaan
                     deze pagina staat beschreven waarvoor deze kosten nodig zijn. Het staat
-                    u overigens vrij een hoger bedrag over te maken. Het deel boven de
-                    &euro;0,50 is een donatie aan de stichting waarmee u de ontwikkeling
+                    je overigens vrij een hoger bedrag over te maken. Het deel boven de
+                    &euro;0,50 is een donatie aan de stichting waarmee je de ontwikkeling
                     van IRMA ondersteunt.
                 </p>
 
                 <form id="form-ideal-request" onsubmit="return false;">
                     <div class="form-group form-bank">
-                        <label for="input-ideal-bank">Kies uw bank</label>
+                        <label for="input-ideal-bank">Kies je bank</label>
                         <select id="input-ideal-bank" class="form-control" required>
-                            <option disabled value="">Loading...</option>
+                            <option disabled value="">Laden...</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="input-amount">Kies bedrag en eventuele donatie</label>
                         <select id="input-amount" class="form-control" required>
-                            <option disabled value="">Loading...</option>
+                            <option disabled value="">Laden...</option>
                         </select>
                     </div>
                     <div class="form-group form-submit text-right">
@@ -71,27 +71,27 @@
                   <p>
                     Het gehele laadproces werkt als volgt:
                     <ol>
-                      <li> U doet een online betaling van minimaal &euro;0,50, via
-                      iDEAL, met uw gebruikelijke bankmiddelen. </li>
-                      <li> Nadat u een iDEAL-betaling volledig voltooid heeft, moet
-                      u terugkeren naar de huidige pagina om de nieuwe
-                      bankattributen in uw IRMA app te laden. Bij sommige banken
+                      <li> Je doet een online betaling van minimaal &euro;0,50, via
+                      iDEAL, met je gebruikelijke bankmiddelen. </li>
+                      <li> Nadat je een iDEAL-betaling volledig voltooid hebt, moet
+                      je terugkeren naar de huidige pagina om het nieuwe
+                      bankkaartje in de IRMA-app te laden. Bij sommige banken
                       gaat die terugkeer automatisch, maar bij andere banken
-                      moet u explicit op een "keer terug" knop drukken.
-                      De attributen die u ontvangt gaan over de gegevens
-                      van de rekening waar u het bedrag mee betaald heeft. Als u
-                      meerdere rekeningen heeft, kunt u zelf kiezen
-                      welke u gebruikt voor de betaling, en dus ook,
-                      van welke rekening u gegevens in uw IRMA app
-                      wilt hebben. Als u van meerdere rekeningen de
-                      gegevens wilt laden, dan dient u het laadproces
+                      moet je expliciet op een "keer terug" knop drukken.
+                      Het kaartje dat je ontvangt gaat over de gegevens
+                      van de rekening waar je het bedrag mee betaald hebt. Als je
+                      meerdere rekeningen hebt, kun je zelf kiezen
+                      welke je gebruikt voor de betaling, en dus ook,
+                      van welke rekening je de gegevens in de IRMA-app
+                      wil hebben. Als je van meerdere rekeningen de
+                      gegevens wil laden, dan dien je het laadproces
                       meerdere keren te doorlopen; er moet dan ook
                       meerdere keren betaald worden,
                       helaas. </li>
                     </ol>
 
                     Het minimumbedrag van &euro;0,50 wordt enerzijds gebruikt om
-                    te controleren of u echt over de bankrekening
+                    te controleren of je echt over de bankrekening
                     beschikt, en anderzijds om de (afgeronde) kosten
                     van de iDEAL-transacties te dekken. De
                     stichting Privacy by Design moet de banken
@@ -103,15 +103,16 @@
 
                   <p>
                     De stichting verwerkt
-                    uw gegevens, afkomstig van iDEAL,
-                    uitsluitend om ze in uw eigen app te laden. De
+                    je gegevens, afkomstig van iDEAL,
+                    uitsluitend om ervoor te zorgen jij de gegevens
+                    in je eigen IRMA-app kunt laden. De
                     stichting houdt hiervan geen eigen registratie
-                    bij. Na het laden van de gegevens in uw app worden
-                    ze terstond door de stichting uit de eigen
+                    bij. Na het laden van de gegevens in je IRMA-app worden
+                    ze direct door de stichting uit de eigen
                     systemen verwijderd. Wel blijft er op de
                     bankrekening van de stichting een
                     (onvermijdelijke) registratie staan van de iDEAL-betaling.
-                    Met het starten van het bovenstaande laadproces gaat u
+                    Met het starten van het bovenstaande laadproces ga je
                     akkoord met de verwerking van uw persoonsgegevens door de
                     stichting Privacy by Design. Uitgebreidere informatie is te vinden
                     in <a href="https://privacybydesign.foundation/privacy-policy/">privacy
@@ -119,31 +120,70 @@
                   </p>
 
                   <i>
-                    <b>Disclaimer:</b> deze uitgifte van IBAN-attributen omvat veel
-                    verschillende verbindingen, tussen u, uw bank, iDEAL en de stichting
+                    <b>Disclaimer:</b> deze uitgifte van bankkaartjes omvat veel
+                    verschillende verbindingen, tussen jou, de bank, iDEAL en de stichting
                     Privacy by Design. Hierbij kan op allerlei manieren iets
                     mis gaan, waardoor de uitgifte niet goed functioneert. Bij het
-                    gebruik van deze dienst accepteert u dit risico. Het bedrag
+                    gebruik van deze dienst accepteer je dit risico. Het bedrag
                     waar het hier over gaat (&euro;0,50) is zo laag dat er geen geld
                     teruggegeven zal worden wanneer eventuele fouten optreden. Deze
-                    attribuut-uitgiftedienst wordt dus zonder garanties aangeboden.
+                    uitgiftedienst voor IRMA-kaartjes wordt dus zonder garanties aangeboden.
                   </i>
                 </div>
             </div>
 
-            <div id="pane-ideal-result-ok" class="hidden">
-                <p>
-                    De iDEAL-transactie is afgerond. Als u de IBAN-attributen nog
-                    niet in de IRMA-app heeft geladen, kunt u dat hier alsnog doen.
-                </p>
-                <div class="text-left">
-                    <button id="btn-ideal-issue" class="btn btn-primary">Laad attributen in IRMA app</button>
+            <div id="pane-ideal-result">
+                <div id="pane-ideal-result-ok" class="hidden">
+                    <p>
+                        De iDEAL-transactie is afgerond. Als je het bankkaartje nog
+                        niet in al je IRMA-apps hebt geladen, kun je dat hier alsnog doen.
+                    </p>
+                    <div class="text-left">
+                        <button id="btn-ideal-issue" class="btn btn-primary">Laad kaartje in IRMA-app</button>
+                    </div>
+                </div>
+
+                <div id="pane-ideal-result-open" class="hidden">
+                    <p>
+                        Je bank heeft de transactie nog niet verwerkt. Dit komt waarschijnlijk door een
+                        storing bij de bank. Controleer de status binnen 48 uur opnieuw. Dit kan op
+                        hetzelfde apparaat dat je nu gebruikt zolang je niet uitlogt of je kunt de
+                        onderstaande link bewaren om deze pagina later opnieuw te kunnen openen.
+                    </p>
+                    <p>
+                        <a id="ideal-retry-link"></a>
+                    </p>
+                </div>
+
+                <div id="pane-ideal-result-retry" class="hidden">
+                    <p>
+                        <button id="btn-ideal-retry" class="btn btn-primary">Probeer opnieuw</button>
+                    </p>
+                </div>
+
+                <div id="pane-ideal-result-logout" class="hidden">
+                    <p>
+                        <button id="btn-ideal-logout" class="btn btn-primary">Log uit</button>
+                    </p>
                 </div>
             </div>
 
-            <div id="pane-ideal-result-fail" class="hidden">
+            <div id="pane-ideal-logout-confirm" class="hidden">
+                <p>Weet je zeker dat je uit wil loggen?</p>
+                <p id="text-ideal-logout-confirm-nolink" class="hidden">
+                    Log alleen uit als je het bankkaartje
+                    al in je IRMA-app hebt geladen. Als je dit nog niet gedaan en je logt toch
+                    uit, dan zul je opnieuw moeten betalen om het kaartje alsnog op te halen.
+                </p>
+                <p id="text-ideal-logout-confirm-link" class="hidden">
+                    Log alleen uit als je het bankkaartje
+                    al in je IRMA-app hebt geladen of als je de link naar de transactie hebt
+                    opgeslagen. Als je dit nog niet gedaan en je logt toch
+                    uit, dan zul je opnieuw moeten betalen om het kaartje alsnog op te halen.
+                </p>
                 <p>
-                    <button id="btn-ideal-retry" class="btn btn-primary">Log uit</button>
+                    <button id="btn-ideal-logout-cancel" class="btn btn-secondary">Annuleer</button>
+                    <button id="btn-ideal-logout-confirm" class="btn btn-danger">Log uit</button>
                 </p>
             </div>
         </div>

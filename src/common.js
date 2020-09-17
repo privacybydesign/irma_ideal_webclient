@@ -16,7 +16,28 @@ function init() {
         clickedButton = e.target;
     });
     $('#btn-ideal-issue').click(finishIDealTransaction);
-    $('#btn-ideal-retry').click(retryIDealTransaction);
+    $('#btn-ideal-logout-confirm').click(deleteIDealTransaction);
+    $('#btn-ideal-logout').click(() => {
+        // If the user is not able to retry the session at all,
+        // then we also don't have to shown the logout warning.
+        if ($('#pane-ideal-result-retry').hasClass('hidden') && $('#pane-ideal-result-ok').hasClass('hidden')) {
+            deleteIDealTransaction();
+            return;
+        }
+        if ($('#pane-ideal-result-open').hasClass('hidden')) {
+            $('#text-ideal-logout-confirm-nolink').removeClass('hidden');
+        } else {
+            $('#text-ideal-logout-confirm-link').removeClass('hidden');
+        }
+        $('#pane-ideal-logout-confirm').removeClass('hidden');
+        $('#pane-ideal-result').addClass('hidden');
+    });
+    $('#btn-ideal-logout-cancel').click(() => {
+        $('#pane-ideal-logout-confirm').addClass('hidden');
+        $('#pane-ideal-result').removeClass('hidden');
+        $('#text-ideal-logout-confirm-nolink').addClass('hidden');
+        $('#text-ideal-logout-confirm-link').addClass('hidden');
+    });
 
     updatePhase();
 }
@@ -34,7 +55,12 @@ function updatePhase() {
 
 function setPhase(num) {
     $('#pane-ideal-result-ok').addClass('hidden');
-    $('#pane-ideal-result-fail').addClass('hidden');
+    $('#pane-ideal-result-open').addClass('hidden');
+    $('#pane-ideal-result-retry').addClass('hidden');
+    $('#pane-ideal-result-logout').addClass('hidden');
+    $('#pane-ideal-logout-confirm').addClass('hidden');
+    $('#text-ideal-logout-confirm-nolink').addClass('hidden');
+    $('#text-ideal-logout-confirm-link').addClass('hidden');
     $(document.body).attr('class', 'phase' + num);
     const params = parseURLParams();
     if (num === 1) {
@@ -188,11 +214,8 @@ function finishIDealTransaction() {
         console.log('issuing session pointer:', response.sessionPointer);
         irma.handleSession(response.sessionPointer, {language: MESSAGES['lang']})
             .then(function(e) {
-                delete localStorage.idx_ideal_trxid; // no longer needed
-                delete localStorage.idx_ideal_ec;
                 console.log('iDeal credential issued:', e);
                 setStatus('success', MESSAGES['issue-success']);
-                $('#btn-ideal-issue').hide();
             }, function(e) {
                 if(e === 'CANCELLED') {
                     console.warn('cancelled:', e);
@@ -203,31 +226,66 @@ function finishIDealTransaction() {
                 }
             })
             .finally(function() {
+                localStorage.idx_ideal_response = 'success';
                 $('#pane-ideal-result-ok').removeClass('hidden');
-                $('#pane-ideal-result-fail').removeClass('hidden');
+                $('#pane-ideal-result-logout').removeClass('hidden');
             });
     }).fail(function(xhr) {
-        $('#pane-ideal-result-fail').removeClass('hidden');
+        $('#pane-ideal-result-logout').removeClass('hidden');
 
-        if (xhr.responseText === 'error:transaction-open') {
-            setStatus('warning', MESSAGES['error:transaction-open'](localStorage.idx_ideal_link));
+        $('#btn-ideal-retry').click(() => {
+            location.href = localStorage.idx_ideal_link;
+        });
+
+        // In case of a rate limiting warning, fallback on the previous error.
+        if (xhr.status === 429) {
+            let seconds = parseInt(xhr.getResponseHeader('Retry-After'));
+            setStatus('warning', MESSAGES['ideal-status:too-many-requests'](Math.ceil(seconds/60)));
+            $('#pane-ideal-result-retry').removeClass('hidden');
+            if (localStorage.idx_ideal_response === 'error:transaction-open') {
+                $('#ideal-retry-link')
+                  .attr('href', localStorage.idx_ideal_link)
+                  .html(localStorage.idx_ideal_link);
+                $('#pane-ideal-result-open').removeClass('hidden');
+            }
             return;
         }
 
-        delete localStorage.idx_ideal_trxid; // not valid anymore
-        delete localStorage.idx_ideal_ec;
-        if (xhr.status === 500 && xhr.responseText in MESSAGES) {
+        localStorage.idx_ideal_response = xhr.responseText;
+        if (xhr.responseText === 'error:transaction-open') {
+            setStatus('cancel');
+            $('#ideal-retry-link')
+              .attr('href', localStorage.idx_ideal_link)
+              .html(localStorage.idx_ideal_link);
+            $('#pane-ideal-result-open').removeClass('hidden');
+            $('#pane-ideal-result-retry').removeClass('hidden');
+        } else if (xhr.status === 500 && xhr.responseText in MESSAGES) {
             setStatus('warning', MESSAGES[xhr.responseText]);
         } else if (xhr.status === 404 && xhr.responseText.substr(0, 21) === 'error:trxid-not-found') {
             setStatus('warning', MESSAGES['ideal-transaction-not-found']);
         } else {
             setStatus('danger', MESSAGES['ideal-status:other'], xhr);
+            $('#pane-ideal-result-retry').removeClass('hidden');
             console.error('failed to finish iDeal transaction:', xhr.responseText);
         }
     });
 }
 
-function retryIDealTransaction() {
+function deleteIDealTransaction() {
+    if (['success', 'error:transaction-cancelled', 'error:transaction-expired'].includes(localStorage.idx_ideal_response)) {
+        $.ajax({
+            method: 'POST',
+            url: config.ideal_api_url + 'delete',
+            data: {
+                trxid: localStorage.idx_ideal_trxid,
+                ec: localStorage.idx_ideal_ec,
+            },
+        });
+    }
+    delete localStorage.idx_ideal_trxid; // not valid anymore
+    delete localStorage.idx_ideal_ec;
+    delete localStorage.idx_ideal_response;
+
     loadIDealInfo();
     setStatus('cancel');
     setPhase(1);
