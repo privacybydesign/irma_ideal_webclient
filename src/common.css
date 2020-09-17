@@ -78,11 +78,19 @@ body:not(.phase2) #pane-ideal-result-ok {
     display: none;
 }
 
-body:not(.phase2) #pane-ideal-result-fail {
+body:not(.phase2) #pane-ideal-result-retry {
     display: none;
 }
 
-#pane-ideal-result-fail {
+body:not(.phase2) #pane-ideal-result-logout {
+    display: none;
+}
+
+body:not(.phase2) #pane-ideal-logout-confirm {
+    display: none;
+}
+
+#pane-ideal-result-logout {
     margin-top: 50px;
 }
 
@@ -128,6 +136,11 @@ body:not(.phase4) #pane-idin-result {
 .btn-primary {
     background-color: #004c92;
     border-color: #004c92;
+}
+
+.btn-danger {
+    background-color: #d44454;
+    border-color: #d44454;
 }
 
 a {
