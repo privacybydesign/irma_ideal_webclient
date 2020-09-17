@@ -20,4 +20,4 @@ rm build/*.example.*
 mkdir build/assets
 cp node_modules/bootstrap/dist/css/bootstrap.min.css build/assets/bootstrap.min.css
 cp node_modules/jquery/dist/jquery.min.js build/assets/jquery.min.js
-cp node_modules/@privacybydesign/irmajs/dist/irma.js build/assets/irma.js
+cp node_modules/@privacybydesign/irma-frontend/dist/irma.js build/assets/irma.js

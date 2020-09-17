@@ -212,12 +212,22 @@ function finishIDealTransaction() {
     }).done(function(response) {
         setStatus('info', MESSAGES['issuing-ideal-credential']);
         console.log('issuing session pointer:', response.sessionPointer);
-        irma.handleSession(response.sessionPointer, {language: MESSAGES['lang']})
+        irma.newPopup({
+            language: MESSAGES['lang'],
+            session: {
+                start: false,
+                mapping: {
+                    sessionPtr: () => response.sessionPointer,
+                },
+                result: false,
+            },
+        })
+            .start()
             .then(function(e) {
                 console.log('iDeal credential issued:', e);
                 setStatus('success', MESSAGES['issue-success']);
             }, function(e) {
-                if(e === 'CANCELLED') {
+                if(e === 'Aborted') {
                     console.warn('cancelled:', e);
                     setStatus('cancel');
                 } else {
