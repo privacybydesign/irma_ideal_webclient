@@ -227,7 +227,7 @@ function finishIDealTransaction() {
                 console.log('iDeal credential issued:', e);
                 setStatus('success', MESSAGES['issue-success']);
             }, function(e) {
-                if(e === 'Aborted') {
+                if(['Cancelled', 'Aborted'].includes(e)) {
                     console.warn('cancelled:', e);
                     setStatus('cancel');
                 } else {
