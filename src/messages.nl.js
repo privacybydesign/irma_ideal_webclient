@@ -12,7 +12,7 @@ var MESSAGES = {
     'failed-to-issue-ideal': 'Bankkaartje konden niet worden uitgegeven.',
     'issue-success': 'Uitgifte bankkaartje succesvol!',
     'error:transaction-cancelled': 'Transactie geannuleerd.',
-    'error:transaction-expired': 'De sessie bij uw bank is verlopen. Helaas kunnen wij uw gegevens daardoor niet meer ophalen.',
+    'error:transaction-expired': 'De sessie bij je bank is verlopen. Helaas kunnen wij uw gegevens daardoor niet meer ophalen.',
     'ideal-status:too-many-requests': (minutes) => `Je moet nog ${minutes} minuten wachten voor wij de transactiestatus opnieuw kunnen controleren bij de bank.`,
     'ideal-status:other': 'Onbekende fout in de iDEAL-transactie.',
     'ideal-status:consumermsg': 'De volgende fout is opgetreden in de iDEAL-transactie:',
