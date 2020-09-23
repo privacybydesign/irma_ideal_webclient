@@ -65,10 +65,10 @@ function setPhase(num) {
     const params = parseURLParams();
     if (num === 1) {
         loadIDealInfo();
-        $('#transaction-alert').hide(); // set default back
+        $('#transaction-alert').addClass('hidden'); // set default back
         if (localStorage.idx_ideal_trxid) {
             // A session is in progress, offer to issue.
-            $('#transaction-alert').show();
+            $('#transaction-alert').removeClass('hidden');
             $('#transaction-alert-link').attr('href', '?trxid=' + localStorage.idx_ideal_trxid + '&ec=' + localStorage.idx_ideal_ec);
         }
     } else if (num === 2) {
@@ -312,7 +312,7 @@ function setStatus(alertType, message, errormsg) {
 
     const alert = $('#status-bar');
     if (alertType === 'cancel') {
-        alert.hide();
+        alert.addClass('hidden');
         return;
     }
 
