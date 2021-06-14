@@ -5,7 +5,7 @@
   "author": "Privacy by Design Foundation",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@privacybydesign/irma-frontend": "^0.1.1-rc.14",
+    "@privacybydesign/irma-frontend": "^0.3.3",
     "bootstrap": "^4.3.1",
     "jquery": "^3.5.1"
   }
