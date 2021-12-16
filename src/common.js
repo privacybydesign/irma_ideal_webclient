@@ -211,13 +211,14 @@ function finishIDealTransaction() {
         },
     }).done(function(response) {
         setStatus('info', MESSAGES['issuing-ideal-credential']);
-        console.log('issuing session pointer:', response.sessionPointer);
+        console.log('issuing session pointer:', response.sessionPtr);
         irma.newPopup({
             language: MESSAGES['lang'],
             session: {
                 start: false,
                 mapping: {
-                    sessionPtr: () => response.sessionPointer,
+                    sessionPtr: () => response.sessionPtr,
+                    frontendRequest: () => response.frontendRequest,
                 },
                 result: false,
             },
